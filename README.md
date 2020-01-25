@@ -4,7 +4,7 @@
 
 The stock market is a place where you can buy, sell, and trade stocks. A stock is a share of a company. So, buying a stock in a company is buying part of that company. If you buy a stock and the price of the company goes up, you will make money. If the price of that same company goes down, you will lose money. Being able to predict whether the price of a stock will rise or fall would be lucrative to any investor.(Amadeo 2019)
 
-The Random Walk Hypothesis is a financial theory that states stock market prices are random, that the changes in price are unpredictable.(Smith 2019) The Random Walk Hypothesis is consistent with the Efficient Market Hypothesis (EMH). EMH is an investment theory that states that the price of a stock reflects all information made available to market participants at any given time.(Van Bergen 2012) Based on Random Walk and EMH, it would be impossible for an investor to predict future prices.
+The **Random Walk Hypothesis** is a financial theory that states stock market prices are random, that the changes in price are unpredictable.(Smith 2019) The Random Walk Hypothesis is consistent with the **Efficient Market Hypothesis** (EMH). EMH is an investment theory that states that the price of a stock reflects all information made available to market participants at any given time.(Van Bergen 2012) Based on Random Walk and EMH, it would be impossible for an investor to predict future prices.
 
 I disagree with these theories. I believe an investor, armed with machine learning models, can predict the price of a stock better than the market can. Technical analysis or “identifying trading opportunities by analyzing statistical trends gathered from trading activity,” can help an investor predict future prices.(Hayes 2019) Machine learning models can aid in technical analysis.
 
@@ -16,22 +16,22 @@ I plan on proving that EMH is false, that the market is not efficient and an inv
 
 For this project I will use stocks from the Information Technology Sector. DeepAR performs better when stocks belong to a cluster.(Das 2018) The list of stocks that will be used are:
 
-- Apple (AAPL)
-- Microsoft (MSFT)
-- Intel (INTC)
-- Cisco (CSCO)
-- Adobe (ADBE)
-- Salesforce (CRM)
-- NVIDIA (NVDA)
-- Accenture (ACN)
-- PayPal (PYPL)
-- Oracle (ORCL)
+- [Apple (AAPL)](https://finance.yahoo.com/quote/AAPL/history?period1=1388534400&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [Microsoft (MSFT)](https://finance.yahoo.com/quote/MSFT/history?period1=1388534400&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [Intel (INTC)](https://finance.yahoo.com/quote/INTC/history?period1=1388448000&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [Cisco (CSCO)](https://finance.yahoo.com/quote/CSCO/history?period1=1388448000&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [Adobe (ADBE)](https://finance.yahoo.com/quote/ADBE/history?period1=1388448000&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [Salesforce (CRM)](https://finance.yahoo.com/quote/CRM/history?period1=1388448000&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [NVIDIA (NVDA)](https://finance.yahoo.com/quote/NVDA/history?period1=1388448000&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [Accenture (ACN)](https://finance.yahoo.com/quote/ACN/history?period1=1388448000&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [PayPal (PYPL)](https://finance.yahoo.com/quote/PYPL/history?period1=1388448000&period2=1577664000&interval=1d&filter=history&frequency=1d)
+- [Oracle (ORCL)](https://finance.yahoo.com/quote/ORCL/history?period1=1388448000&period2=1577664000&interval=1d&filter=history&frequency=1d)
 
-These stocks were chosen from the Vanguard Information Technology ETF. I chose the top ten weighted stocks in the fund (ignoring Visa and Mastercard which I do not believe fit perfectly in the Information Technology sector). Historical data for these stocks comes from Yahoo Finance. I will use the daily adjusted close price of each stock over a 5 year span (January 1, 2014 - December 31, 2018) as training data and 1 year of test data (January 1, 2019 - December 31, 2019). I chose a 5 year span because I wanted DeepAR to detect any trends in seasonality of the stocks.
+These stocks were chosen from the [Vanguard Information Technology ETF](https://etfdb.com/etf/VGT/#holdings). I chose the top ten weighted stocks in the fund (ignoring Visa and Mastercard which I do not believe fit perfectly in the Information Technology sector). Historical data for these stocks comes from Yahoo Finance. I will use the daily adjusted close price of each stock over a 5 year span (January 1, 2014 - December 31, 2018) as training data and 1 year of test data (January 1, 2019 - December 31, 2019). I chose a 5 year span because I wanted DeepAR to detect any trends in seasonality of the stocks.
 
 ## Solution Statement
 
-The proposed solution involves applying deep learning techniques that have proved to be successful for forecasting time series. The first step would be to get the data from Yahoo Finance. This could be done in a variety of ways. You could get the data using the API available on rapidAPI, download it directly from Yahoo Finance to upload, or by web scraping. Then, the data needs to be formatted for DeepAR.
+The proposed solution involves applying deep learning techniques that have proved to be successful for forecasting time series. The first step would be to get the data from Yahoo Finance. This could be done in a variety of ways. You could get the data using the API available on [rapidAPI](https://rapidapi.com/), download it directly from Yahoo Finance to upload, or by web scraping. Then, the data needs to be [formatted for DeepAR](https://docs.aws.amazon.com/sagemaker/latest/dg/deepar.html#deepar-inputoutput).
 
 After that, we will use DeepAR and the adjusted close price for stocks to train an Estimator and create a Predictor which will predict the future stock price. The model will be determined successful if it can predict future prices better than the Naive Method.
 
@@ -53,20 +53,20 @@ Once my model has been refined, I will deploy it and create a simple web app to 
 
 ## References
 
-Amadeo, Kimberly. “Before You Invest in the Stock Market, Make Sure You Know What It Is.” The Balance, The Balance, 25 July 2019, www.thebalance.com/what-is-the-stock-market-how-it-works-3305893.
+Amadeo, Kimberly. “Before You Invest in the Stock Market, Make Sure You Know What It Is.” The Balance, The Balance, 25 July 2019, [www.thebalance.com/what-is-the-stock-market-how-it-works-3305893](www.thebalance.com/what-is-the-stock-market-how-it-works-3305893).
 
-Das, Binoy. “Aws-Samples/Amazon-Sagemaker-Stock-Prediction.” GitHub, 20 Nov. 2018, github.com/aws-samples/amazon-sagemaker-stock-prediction/blob/master/notebooks/dbg-deepar.ipynb.
+Das, Binoy. “Aws-Samples/Amazon-Sagemaker-Stock-Prediction.” GitHub, 20 Nov. 2018, [github.com/aws-samples/amazon-sagemaker-stock-prediction/blob/master/notebooks/dbg-deepar.ipynb](github.com/aws-samples/amazon-sagemaker-stock-prediction/blob/master/notebooks/dbg-deepar.ipynb).
 
-Halimawan, Alam Akbar, and Subiakto Sukarno. “STOCK PRICE FORECASTING ACCURACY ANALYSIS USING MEAN ABSOLUT DEVIATION (MAD) AND MEAN ABSOLUTE PERCENTAGE ERROR (MAPE) ON SMOOTHING MOVING AVERAGE AND EXPONENTIAL MOVING AVERAGE INDIKATOR.” The Indonesian Journal of Business Administration, vol. 2, 13 Nov. 2013, pp. 1613–1623., https://media.neliti.com/media/publications/68283-EN-stock-price-forecasting-accuracy-analysi.pdf.
+Halimawan, Alam Akbar, and Subiakto Sukarno. “STOCK PRICE FORECASTING ACCURACY ANALYSIS USING MEAN ABSOLUT DEVIATION (MAD) AND MEAN ABSOLUTE PERCENTAGE ERROR (MAPE) ON SMOOTHING MOVING AVERAGE AND EXPONENTIAL MOVING AVERAGE INDIKATOR.” The Indonesian Journal of Business Administration, vol. 2, 13 Nov. 2013, pp. 1613–1623., [https://media.neliti.com/media/publications/68283-EN-stock-price-forecasting-accuracy-analysi.pdf](https://media.neliti.com/media/publications/68283-EN-stock-price-forecasting-accuracy-analysi.pdf).
 
-Hayes, Adam. “Technical Analysis Definition.” Investopedia, Investopedia, 18 Aug. 2019, www.investopedia.com/terms/t/technicalanalysis.asp.
+Hayes, Adam. “Technical Analysis Definition.” Investopedia, Investopedia, 18 Aug. 2019, [www.investopedia.com/terms/t/technicalanalysis.asp](www.investopedia.com/terms/t/technicalanalysis.asp).
 
-Hyndman, Rob J, and George Athanasopoulos. “Some Simple Forecasting Methods.” Forecasting: Principles and Practice, 15 Jan. 2020, otexts.com/fpp2/simple-methods.html.
+Hyndman, Rob J, and George Athanasopoulos. “Some Simple Forecasting Methods.” Forecasting: Principles and Practice, 15 Jan. 2020, [otexts.com/fpp2/simple-methods.html](otexts.com/fpp2/simple-methods.html).
 
-Mishra, Abhishek. “Machine Learning in the AWS Cloud: Add Intellegence to Applications with Amazon SageMaker and Amazon Rekognition.” Amazon, John Wiley & Sons, Inc., 2019, docs.aws.amazon.com/sagemaker/latest/dg/deepar.html.
+Mishra, Abhishek. “Machine Learning in the AWS Cloud: Add Intellegence to Applications with Amazon SageMaker and Amazon Rekognition.” Amazon, John Wiley & Sons, Inc., 2019, [docs.aws.amazon.com/sagemaker/latest/dg/deepar.html](docs.aws.amazon.com/sagemaker/latest/dg/deepar.html).
 
-Ramírez, Rubén Guerrero. Different Methods for Forecasting Time Series Tutorial, 2 Dec. 2017, rstudio-pubs-static.s3.amazonaws.com/336602_0a55f2341eab4637b27766f6619af477.html.
+Ramírez, Rubén Guerrero. Different Methods for Forecasting Time Series Tutorial, 2 Dec. 2017, [rstudio-pubs-static.s3.amazonaws.com/336602_0a55f2341eab4637b27766f6619af477.html](rstudio-pubs-static.s3.amazonaws.com/336602_0a55f2341eab4637b27766f6619af477.html).
 
-Smith, Tim. “Random Walk Theory.” Investopedia, Investopedia, 18 Nov. 2019, www.investopedia.com/terms/r/randomwalktheory.asp.
+Smith, Tim. “Random Walk Theory.” Investopedia, Investopedia, 18 Nov. 2019, [www.investopedia.com/terms/r/randomwalktheory.asp](www.investopedia.com/terms/r/randomwalktheory.asp).
 
-Van Bergen, Jason. “Efficient Market Hypothesis: Is The Stock Market Efficient?” Forbes, Forbes Magazine, 1 May 2012, www.forbes.com/sites/investopedia/2011/01/12/efficient-market-hypothesis-is-the-stock-market-efficient/.
+Van Bergen, Jason. “Efficient Market Hypothesis: Is The Stock Market Efficient?” Forbes, Forbes Magazine, 1 May 2012, [www.forbes.com/sites/investopedia/2011/01/12/efficient-market-hypothesis-is-the-stock-market-efficient/](www.forbes.com/sites/investopedia/2011/01/12/efficient-market-hypothesis-is-the-stock-market-efficient/).
