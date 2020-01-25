@@ -1,52 +1,72 @@
-# Udacity-ML-Capstone-Project
+# Capstone Proposal
 
-## Capstone Proposal
-Shamus Clifford
-January 20, 2020
+## Domain Background
 
-## Proposal
+The stock market is a place where you can buy, sell, and trade stocks. A stock is a share of a company. So, buying a stock in a company is buying part of that company. If you buy a stock and the price of the company goes up, you will make money. If the price of that same company goes down, you will lose money. Being able to predict whether the price of a stock will rise or fall would be lucrative to any investor.(Amadeo 2019)
 
-### Domain Background
-_(approx. 1-2 paragraphs)_
+The Random Walk Hypothesis is a financial theory that states stock market prices are random, that the changes in price are unpredictable.(Smith 2019) The Random Walk Hypothesis is consistent with the Efficient Market Hypothesis (EMH). EMH is an investment theory that states that the price of a stock reflects all information made available to market participants at any given time.(Van Bergen 2012) Based on Random Walk and EMH, it would be impossible for an investor to predict future prices.
 
-In this section, provide brief details on the background information of the domain from which the project is proposed. Historical information relevant to the project should be included. It should be clear how or why a problem in the domain can or should be solved. Related academic research should be appropriately cited in this section, including why that research is relevant. Additionally, a discussion of your personal motivation for investigating a particular problem in the domain is encouraged but not required.
+I disagree with these theories. I believe an investor, armed with machine learning models, can predict the price of a stock better than the market can. Technical analysis or “identifying trading opportunities by analyzing statistical trends gathered from trading activity,” can help an investor predict future prices.(Hayes 2019) Machine learning models can aid in technical analysis.
 
-### Problem Statement
-_(approx. 1 paragraph)_
+## Problem Statement
 
-In this section, clearly describe the problem that is to be solved. The problem described should be well defined and should have at least one relevant potential solution. Additionally, describe the problem thoroughly such that it is clear that the problem is quantifiable (the problem can be expressed in mathematical or logical terms) , measurable (the problem can be measured by some metric and clearly observed), and replicable (the problem can be reproduced and occurs more than once).
+I plan on proving that EMH is false, that the market is not efficient and an investor can predict the price of a stock, meaning a stock's future price is not totally random as the Random Walk Hypothesis suggests. I will analyze a market sectors price movements over a 5 year span to predict the stock price in the future (1 day, 7 days, 28 days). Success will be measured against the Naive Method. The Naive Method “forecasts the next values using the last value observed.”(Ramírez 2017) Using the Naive Method, the price of the stock on January 3 would be the same price it was at the end of January 2. This method works well for a random walk forecast.(Hyndman & Athanasopoulos 2018) I will test this against the AWS DeepAR Forecasting algorithm which is a “supervised learning algorithm for forecasting scalar (one-dimensional) time series using recurrent neural networks (RNN).”(Mishra 2019) Using DeepAR, I will predict stock prices better than the Naive Method.
 
-### Datasets and Inputs
-_(approx. 2-3 paragraphs)_
+## Datasets and Inputs
 
-In this section, the dataset(s) and/or input(s) being considered for the project should be thoroughly described, such as how they relate to the problem and why they should be used. Information such as how the dataset or input is (was) obtained, and the characteristics of the dataset or input, should be included with relevant references and citations as necessary It should be clear how the dataset(s) or input(s) will be used in the project and whether their use is appropriate given the context of the problem.
+For this project I will use stocks from the Information Technology Sector. DeepAR performs better when stocks belong to a cluster.(Das 2018) The list of stocks that will be used are:
 
-### Solution Statement
-_(approx. 1 paragraph)_
+- Apple (AAPL)
+- Microsoft (MSFT)
+- Intel (INTC)
+- Cisco (CSCO)
+- Adobe (ADBE)
+- Salesforce (CRM)
+- NVIDIA (NVDA)
+- Accenture (ACN)
+- PayPal (PYPL)
+- Oracle (ORCL)
 
-In this section, clearly describe a solution to the problem. The solution should be applicable to the project domain and appropriate for the dataset(s) or input(s) given. Additionally, describe the solution thoroughly such that it is clear that the solution is quantifiable (the solution can be expressed in mathematical or logical terms) , measurable (the solution can be measured by some metric and clearly observed), and replicable (the solution can be reproduced and occurs more than once).
+These stocks were chosen from the Vanguard Information Technology ETF. I chose the top ten weighted stocks in the fund (ignoring Visa and Mastercard which I do not believe fit perfectly in the Information Technology sector). Historical data for these stocks comes from Yahoo Finance. I will use the daily adjusted close price of each stock over a 5 year span (January 1, 2014 - December 31, 2018) as training data and 1 year of test data (January 1, 2019 - December 31, 2019). I chose a 5 year span because I wanted DeepAR to detect any trends in seasonality of the stocks.
 
-### Benchmark Model
-_(approximately 1-2 paragraphs)_
+## Solution Statement
 
-In this section, provide the details for a benchmark model or result that relates to the domain, problem statement, and intended solution. Ideally, the benchmark model or result contextualizes existing methods or known information in the domain and problem given, which could then be objectively compared to the solution. Describe how the benchmark model or result is measurable (can be measured by some metric and clearly observed) with thorough detail.
+The proposed solution involves applying deep learning techniques that have proved to be successful for forecasting time series. The first step would be to get the data from Yahoo Finance. This could be done in a variety of ways. You could get the data using the API available on rapidAPI, download it directly from Yahoo Finance to upload, or by web scraping. Then, the data needs to be formatted for DeepAR.
 
-### Evaluation Metrics
-_(approx. 1-2 paragraphs)_
+After that, we will use DeepAR and the adjusted close price for stocks to train an Estimator and create a Predictor which will predict the future stock price. The model will be determined successful if it can predict future prices better than the Naive Method.
 
-In this section, propose at least one evaluation metric that can be used to quantify the performance of both the benchmark model and the solution model. The evaluation metric(s) you propose should be appropriate given the context of the data, the problem statement, and the intended solution. Describe how the evaluation metric(s) are derived and provide an example of their mathematical representations (if applicable). Complex evaluation metrics should be clearly defined and quantifiable (can be expressed in mathematical or logical terms).
+## Benchmark Model
 
-### Project Design
-_(approx. 1 page)_
+The benchmark model will be the Naive Method. The Naive Method sets all forecasts to be the value of the last observation (the previous days adjusted close price). This method works well for random walk forecasts.(Hyndman & Athanasopoulos 2018)
 
-In this final section, summarize a theoretical workflow for approaching a solution given the problem. Provide thorough discussion for what strategies you may consider employing, what analysis of the data might be required before being used, or which algorithms will be considered for your implementation. The workflow and discussion that you provide should align with the qualities of the previous sections. Additionally, you are encouraged to include small visualizations, pseudocode, or diagrams to aid in describing the project design, but it is not required. The discussion should clearly outline your intended workflow of the capstone project.
+## Evaluation Metrics
 
------------
+The evaluation metric will be Mean Absolute Percentage Error (MAPE). I will compare the MAPE for the Naive Method and compare it to the DeepAR model. The method with a smaller MAPE did a better job at predicting the future stock price.(Halimawan & Sukarno 2013)
 
-**Before submitting your proposal, ask yourself. . .**
+## Project Design
 
-- Does the proposal you have written follow a well-organized structure similar to that of the project template?
-- Is each section (particularly **Solution Statement** and **Project Design**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
-- Would the intended audience of your project be able to understand your proposal?
-- Have you properly proofread your proposal to assure there are minimal grammatical and spelling mistakes?
-- Are all the resources used for this project correctly cited and referenced?
+First, I will collect the data from Yahoo Finance. Then, I will clean the data removing details that are irrelevant. The details I will focus on are date, stock ticker, and adjusted close price for the 6 year span January 1, 2014 - December 31, 2019. Next, I will prepare my data by splitting it into train and test sets. The training data will be from January 1, 2014 - December 31, 2018. The test data will be from January 1, 2018 - December 31, 2019. Finally, I will prepare my data by turning it into a JSON Lines format for the DeepAR Algorithm.
+
+After my data has been prepared, I will train the DeepAR model using the training data. Once the model has been trained, I will be able to evaluate my model and compare my results to the Naive Method. At this point I can make adjustments to my model if it is not performing as expected.
+
+Once my model has been refined, I will deploy it and create a simple web app to predict future stock prices for the 10 stocks listed previously. Creating the web app will involve having a deployed model, a Lambda function and an API for my for my web app to interact with.
+
+## References
+
+Amadeo, Kimberly. “Before You Invest in the Stock Market, Make Sure You Know What It Is.” The Balance, The Balance, 25 July 2019, www.thebalance.com/what-is-the-stock-market-how-it-works-3305893.
+
+Das, Binoy. “Aws-Samples/Amazon-Sagemaker-Stock-Prediction.” GitHub, 20 Nov. 2018, github.com/aws-samples/amazon-sagemaker-stock-prediction/blob/master/notebooks/dbg-deepar.ipynb.
+
+Halimawan, Alam Akbar, and Subiakto Sukarno. “STOCK PRICE FORECASTING ACCURACY ANALYSIS USING MEAN ABSOLUT DEVIATION (MAD) AND MEAN ABSOLUTE PERCENTAGE ERROR (MAPE) ON SMOOTHING MOVING AVERAGE AND EXPONENTIAL MOVING AVERAGE INDIKATOR.” The Indonesian Journal of Business Administration, vol. 2, 13 Nov. 2013, pp. 1613–1623., https://media.neliti.com/media/publications/68283-EN-stock-price-forecasting-accuracy-analysi.pdf.
+
+Hayes, Adam. “Technical Analysis Definition.” Investopedia, Investopedia, 18 Aug. 2019, www.investopedia.com/terms/t/technicalanalysis.asp.
+
+Hyndman, Rob J, and George Athanasopoulos. “Some Simple Forecasting Methods.” Forecasting: Principles and Practice, 15 Jan. 2020, otexts.com/fpp2/simple-methods.html.
+
+Mishra, Abhishek. “Machine Learning in the AWS Cloud: Add Intellegence to Applications with Amazon SageMaker and Amazon Rekognition.” Amazon, John Wiley & Sons, Inc., 2019, docs.aws.amazon.com/sagemaker/latest/dg/deepar.html.
+
+Ramírez, Rubén Guerrero. Different Methods for Forecasting Time Series Tutorial, 2 Dec. 2017, rstudio-pubs-static.s3.amazonaws.com/336602_0a55f2341eab4637b27766f6619af477.html.
+
+Smith, Tim. “Random Walk Theory.” Investopedia, Investopedia, 18 Nov. 2019, www.investopedia.com/terms/r/randomwalktheory.asp.
+
+Van Bergen, Jason. “Efficient Market Hypothesis: Is The Stock Market Efficient?” Forbes, Forbes Magazine, 1 May 2012, www.forbes.com/sites/investopedia/2011/01/12/efficient-market-hypothesis-is-the-stock-market-efficient/.
